@@ -3,6 +3,26 @@ Self-Driving Car Engineer Nanodegree Program
 
 ---
 
+## The model
+
+The kinematic model includes the vehicle's x and y coordinates, orientation angle (psi), and velocity, as well as the cross-track error and psi error (epsi). Actuator outputs are acceleration and delta (steering angle). The model combines the state and actuations from the previous timestep to calculate the state for the current timestep based on the equations below:
+
+![equations](./eqns.png)
+
+## Timestep Length and Elapsed Duration (N & dt)
+
+The values chosen for N and dt are 10 and 0.05 ([MPC.cpp](src/MPC.cpp), lines 9-10), respectively. These values mean that the optimizer is considering a half-second duration in which to determine a corrective trajectory. Adjusting either N or dt (even by small amounts) often produced erratic behavior. Other values tried include 10 / 0.1, 15 / 0.15 and many others.
+
+## Polynomial Fitting and MPC Preprocessing
+
+The waypoints are preprocessed by transforming them to the vehicle's perspective (see [main.cpp](src/main.cpp) lines 108-111). This simplifies the process to fit a polynomial to the waypoints because the vehicle's x and y coordinates are now at the origin (0, 0) and the orientation angle is also zero.
+
+## Model Predictive Control with Latency
+
+If there is a latency in the vehicle physicals, it is important to measure that latency and incorporate it in the model itself. In this project, it is indicated that the simulator is having a latency of 100 milli seconds, hence that latency is also incorporated before the actuators values are arrived and sent to vehicle. The code is in [main.cpp](src/main.cpp) file at lines number 116-131.
+
+---
+
 ## Dependencies
 
 * cmake >= 3.5
