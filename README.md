@@ -7,7 +7,7 @@ Self-Driving Car Engineer Nanodegree Program
 
 The kinematic model includes the vehicle's x and y coordinates, orientation angle (psi), and velocity, as well as the cross-track error and psi error (epsi). Actuator outputs are acceleration and delta (steering angle). The model combines the state and actuations from the previous timestep to calculate the state for the current timestep based on the equations below:
 
-![equations](eqns.png)
+![equations](./eqns.jpg)
 
 ## Timestep Length and Elapsed Duration (N & dt)
 
