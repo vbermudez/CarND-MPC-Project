@@ -11,7 +11,14 @@ The kinematic model includes the vehicle's x and y coordinates, orientation angl
 
 ## Timestep Length and Elapsed Duration (N & dt)
 
-The values chosen for N and dt are 10 and 0.05 ([MPC.cpp](src/MPC.cpp), lines 9-10), respectively. These values mean that the optimizer is considering a half-second duration in which to determine a corrective trajectory. Adjusting either N or dt (even by small amounts) often produced erratic behavior. Other values tried include 10 / 0.1, 15 / 0.15 and many others.
+The values chosen for N and dt are 15 and 0.05 ([MPC.cpp](src/MPC.cpp), lines 9-10), respectively. These values mean that the optimizer is considering a half-second duration in which to determine a corrective trajectory. Adjusting either N or dt (even by small amounts) often produced erratic behavior. Other values tried include 10 / 0.1, 15 / 0.15 and many others.
+
+- Why smaller dt is better (finer resolution)?
+  - Using a smaller _dt_ results in a higher step frequency, obtaining more realible calculations.
+- Why larger N isn't always better (computational time)?
+  - The larger _N_ is, the more cycles per _dt_ exists. In the other hand, we can predict farther in the future of the trajectory.
+- How does time horizon (N*dt) affect the predicted path?
+  - As I see it, it is a matter of equilibrium. Ideally, we'll use a large _N_ (longer trajectory) and a small _dt_ (finer resolution). But that means a higher computational time, because we'll have a bucle of _N_ steps each _dt_ milliseconds.
 
 ## Polynomial Fitting and MPC Preprocessing
 

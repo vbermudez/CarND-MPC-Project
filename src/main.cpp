@@ -112,7 +112,7 @@ int main() {
 
           auto coeffs = polyfit(ptsx_vc, ptsy_vc, 3);
           double cte = polyeval(coeffs, 0.0);
-          double epsi = atan(coeffs[1]);
+          double epsi = -atan(coeffs[1]);
           double latency_dt = 0.1; // 100 ms
           double Lf = 2.67;
           double throttle = j[1]["throttle"];
@@ -123,7 +123,7 @@ int main() {
           double latency_v = v + throttle * latency_dt;
           double latency_cte = cte + v * sin(epsi) * latency_dt;
           double expected_psi = atan(coeffs[1] + 2.0 * coeffs[2] * latency_x + 3.0 * coeffs[3] * latency_x*latency_x);
-          double latency_epsi = psi - expected_psi;
+          double latency_epsi = latency_psi - expected_psi;
           Eigen::VectorXd state(6);
 
           state << latency_x, latency_y, latency_psi, latency_v, latency_cte, latency_epsi;

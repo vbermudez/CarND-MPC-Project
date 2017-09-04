@@ -6,7 +6,7 @@
 using CppAD::AD;
 
 // TODO: Set the timestep length and duration
-size_t N = 10;
+size_t N = 15;
 double dt = 0.05;
 
 // This value assumes the model presented in the classroom is used.
@@ -174,8 +174,8 @@ vector<double> MPC::Solve(Eigen::VectorXd state, Eigen::VectorXd coeffs) {
   }
 
 	for (size_t i = delta_start; i < a_start; i++) {
-		vars_lowerbound[i] = -max_angle; //1.0e19;
-		vars_upperbound[i] = max_angle; //1.0e19;
+		vars_lowerbound[i] = -max_angle;
+		vars_upperbound[i] = max_angle;
   }
   
   // Acceleration & braking
